@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Language Learning Helper",
+  "version": "1.0",
+  "description": "Replace random words with their translations to learn a new language.",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "scripting",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png"
+    }
+  }
+}

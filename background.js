@@ -36,11 +36,9 @@ async function translationFunction(selectedLanguage) {
         }
       }
 
-      // Wrap the changed text in a temporary element to convert back to text & nodes
       const temp = document.createElement("div");
       temp.innerHTML = words.join(" ");
 
-      // Replace the original text node with the new nodes
       while (temp.firstChild) {
         node.parentNode.insertBefore(temp.firstChild, node);
       }
@@ -53,7 +51,7 @@ async function translationFunction(selectedLanguage) {
   }
 
   async function getTranslation(text, targetLanguage) {
-    const apiKey = "AIzaSyDWyt9LFvMOihkox_cyodq_muATeqvVI2Q"; // Replace with your API key
+    const apiKey = "API-KEY"; // Replace with your API key
     const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
     const body = {
       q: text,

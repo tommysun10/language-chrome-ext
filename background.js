@@ -1,3 +1,4 @@
+importScripts('config.js');
 function getCurrentTab() {
   return new Promise((resolve, reject) => {
     let queryOptions = { active: true, lastFocusedWindow: true };
@@ -11,7 +12,7 @@ function getCurrentTab() {
   });
 }
 
-async function translationFunction(selectedLanguage) {
+async function translationFunction(selectedLanguage, API_KEY) {
   const style = document.createElement("style");
   style.textContent = `
       .translated-word {
@@ -28,7 +29,11 @@ async function translationFunction(selectedLanguage) {
       for (let i = 0; i < words.length; i++) {
         const word = words[i];
         if (Math.random() < 0.05 && translatedCount < 50) {
-          const translation = await getTranslation(word, selectedLanguage);
+          const translation = await getTranslation(
+            word,
+            selectedLanguage,
+            API_KEY
+          );
           words[
             i
           ] = `<span class="translated-word" title="${word}">${translation}</span>`;
@@ -51,8 +56,8 @@ async function translationFunction(selectedLanguage) {
   }
 
   async function getTranslation(text, targetLanguage) {
-    const apiKey = "API-KEY"; // Replace with your API key
-    const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
+    console.log("API_KEY: ", API_KEY);
+    const url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
     const body = {
       q: text,
       target: targetLanguage,
@@ -74,9 +79,10 @@ async function translationFunction(selectedLanguage) {
 chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
   if (message.action === "translatePage") {
     const tab = await getCurrentTab();
+    console.log("config: ", config);
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      args: [message.language],
+      args: [message.language, config.API_KEY],
       func: translationFunction,
     });
 

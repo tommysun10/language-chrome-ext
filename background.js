@@ -18,6 +18,7 @@ async function translationFunction(selectedLanguage, API_KEY) {
       .translated-word {
           background-color: yellow;
           border-bottom: 1px dotted black;
+          color: black;
       }
       `;
   document.head.append(style);
@@ -28,7 +29,7 @@ async function translationFunction(selectedLanguage, API_KEY) {
       let translatedCount = 0;
       for (let i = 0; i < words.length; i++) {
         const word = words[i];
-        if (Math.random() < 0.05 && translatedCount < 50) {
+        if (Math.random() < 0.02 && translatedCount < 50) {
           const translation = await getTranslation(
             word,
             selectedLanguage,

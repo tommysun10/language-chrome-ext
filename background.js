@@ -8,7 +8,7 @@ async function translationFunction(selectedLanguage, API_KEY) {
   let uniqueTranslatedWords = []
   const seenWords = new Set()
   let translatedCount = 0;
-  const uniqueSplitter = "|||...|||"
+  const uniqueSplitter = "|.|"
   const languageDictionary = {}
 
   getUniqueWordsToTranslate(document.body);

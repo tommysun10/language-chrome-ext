@@ -1,14 +1,14 @@
 const API_KEY = ""
 async function translationFunction(selectedLanguage, API_KEY) {
-  const WORDS_TO_TRANSLATE = 5
-  const PROBABILITY_OF_TRANSLATION = 0.05
+  const WORDS_TO_TRANSLATE = 50
+  const PROBABILITY_OF_TRANSLATION = 0.1
 
 
   const uniqueWordsToTranslate = []
   let uniqueTranslatedWords = []
   const seenWords = new Set()
   let translatedCount = 0;
-  const uniqueSplitter = "|.|"
+  const uniqueSplitter = "|."
   const languageDictionary = {}
 
   getUniqueWordsToTranslate(document.body);
